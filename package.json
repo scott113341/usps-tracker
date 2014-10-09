@@ -4,7 +4,7 @@
   "description": "A CLI tool to check that status of multiple USPS tracking numbers.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --recursive --reporter spec ./test"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/scott113341/usps-tracker/issues"
   },
-  "homepage": "https://github.com/scott113341/usps-tracker"
+  "homepage": "https://github.com/scott113341/usps-tracker",
+  "dependencies": {
+    "mocha": "^1.21.4"
+  }
 }
