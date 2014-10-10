@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/scott113341/usps-tracker",
   "dependencies": {
+    "csv": "^0.4.0",
     "mocha": "^1.21.4"
   }
 }
