@@ -1,9 +1,9 @@
 'use strict';
 
-var request = require('request');
-var cheerio = require('cheerio');
-var csv = require('csv');
-var fs = require('fs');
+var request = require('request'),
+    cheerio = require('cheerio'),
+    csv = require('csv'),
+    fs = require('fs');
 
 
 
