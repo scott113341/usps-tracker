@@ -23,6 +23,7 @@ var outputArray = [[
 /*
   read input.txt
  */
+
 fs.readFile('input.txt', 'utf8', function(err, data) {
   if (err) {
     console.log(err);
@@ -59,6 +60,7 @@ var parseInput = function() {
 /*
   get tracking information from usps
  */
+
 var getTrackingInfo = function() {
   var completedRequests = 0;
 
