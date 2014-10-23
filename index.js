@@ -71,7 +71,7 @@ var getTrackingInfo = function() {
 
     request(url, function(err, response, body) {
       completedRequests = completedRequests + 1;
-      console.log(completedRequests + ' completed requests (total ' + trackingNumbers.length + ')');
+      console.log('Completed request ' + completedRequests + ' of ' + trackingNumbers.length);
 
       var outputLine = [];
       var status = '';
