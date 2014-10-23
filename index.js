@@ -15,7 +15,8 @@ var inputString = '';
 
 var outputArray = [[
   'Tracking Number',
-  'Delivered?'
+  'Status',
+  'Status Date'
 ]];
 
 
@@ -73,18 +74,23 @@ var getTrackingInfo = function() {
 
       var outputLine;
       var deliveryStatus;
+      var statusDate;
 
       if (err) {
         deliveryStatus = 'Request error!';
       }
       else {
-        deliveryStatus = 'parsing html';
-
         var $ = cheerio.load(body);
+        
         deliveryStatus = $('p.info-text.first').first().text().trim();
+
+        statusDate = $('tr.latest-detail td.date-time p').text().trim();
+        var statusDateRegex = /.+ \d{4}/;
+        var result = statusDateRegex.exec(statusDate);
+        statusDate = result[0];
       }
 
-      outputLine = [trackingNumber, deliveryStatus];
+      outputLine = [trackingNumber, deliveryStatus, statusDate];
       outputArray.push(outputLine);
 
       if (completedRequests === trackingNumbers.length) {
