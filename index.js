@@ -97,7 +97,7 @@ var getTrackingInfo = function() {
         signedBy = $('div.detailed-info').first().text().trim();
         var signedByRegex = /signed for by (.+)\./;
         result = signedByRegex.exec(signedBy);
-        signedBy = result[1];
+        if (result) signedBy = result[1];
       }
 
       outputLine = [trackingNumber, status, statusDate, signedBy];
