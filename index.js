@@ -16,7 +16,8 @@ var inputString = '';
 var outputArray = [[
   'Tracking Number',
   'Status',
-  'Status Date'
+  'Status Date',
+  'Signed By'
 ]];
 
 
@@ -70,27 +71,36 @@ var getTrackingInfo = function() {
 
     request(url, function(err, response, body) {
       completedRequests = completedRequests + 1;
-      console.log(completedRequests + ' completed requests');
+      console.log(completedRequests + ' completed requests (total ' + trackingNumbers.length + ')');
 
-      var outputLine;
-      var deliveryStatus;
-      var statusDate;
+      var outputLine = [];
+      var status = '';
+      var statusDate = '';
+      var signedBy = '';
 
       if (err) {
-        deliveryStatus = 'Request error!';
+        status = 'Request error!';
       }
       else {
         var $ = cheerio.load(body);
-        
-        deliveryStatus = $('p.info-text.first').first().text().trim();
 
+        // get status
+        status = $('p.info-text.first').first().text().trim();
+
+        // get status date
         statusDate = $('tr.latest-detail td.date-time p').text().trim();
         var statusDateRegex = /.+ \d{4}/;
         var result = statusDateRegex.exec(statusDate);
         statusDate = result[0];
+
+        // get signed by
+        signedBy = $('div.detailed-info').first().text().trim();
+        var signedByRegex = /signed for by (.+)\./;
+        result = signedByRegex.exec(signedBy);
+        signedBy = result[1];
       }
 
-      outputLine = [trackingNumber, deliveryStatus, statusDate];
+      outputLine = [trackingNumber, status, statusDate, signedBy];
       outputArray.push(outputLine);
 
       if (completedRequests === trackingNumbers.length) {
